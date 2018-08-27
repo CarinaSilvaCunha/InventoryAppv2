@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    style="@style/linear_layout_list_item">
+    <LinearLayout
+        android:id="@+id/book_info_list"
+        style="@style/linear_layout_list_item02">
+        <TextView
+            android:id="@+id/book_name"
+            tools:text="@string/name_placeholder"
+            style="@style/list_item_text_view_01" />
+        <TextView
+            android:id="@+id/book_price"
+            tools:text="@string/price_placeholder"
+            style="@style/list_item_text_view_02" />
+        <TextView
+            android:id="@+id/books_in_stock"
+            tools:text="@string/stock_placeholder"
+            style="@style/list_item_text_view_03" />
+    </LinearLayout>
+    <ImageButton
+        android:id="@+id/sell_book"
+        android:src="@drawable/sell_book"
+        style="@style/image_button_list_item" />
+</LinearLayout>

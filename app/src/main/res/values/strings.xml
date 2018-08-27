@@ -1,0 +1,78 @@
+<resources>
+    <string name="app_name">Inventory App (v2)</string>
+    <!-- Book genre's -->
+    <string name="genre_science_fiction">Science Fiction</string>
+    <string name="genre_drama">Drama</string>
+    <string name="genre_romance">Romance</string>
+    <string name="genre_horror">Horror</string>
+    <string name="genre_self_help">Self Help</string>
+    <string name="genre_travel">Travel</string>
+    <string name="genre_not_available">N/A</string>
+
+    <string name="bookstore">This is a bookstore app!</string>
+    <!-- MainActivity -->
+    <string name="all_deleted">All Books were successfully deleted!</string>
+    <string name="insert_dummy_data">Insert Dummy Data</string>
+    <string name="delete_all_books">Delete All Books</string>
+    <!-- Dummy Data -->
+    <string name="dummy_book_name">The Man Who Mistook His Wife for a Hat</string>
+    <string name="dummy_book_supplier">Pan MacMillan</string>
+    <string name="dummy_book_supplier_email">oliver@sacks.com</string>
+    <!-- list_item -->
+    <string name="sell_book">selling icon</string>
+    <string name="dummy_supplier_phone_number">914578360</string>
+    <!-- bookStoreEditor -->
+    <string name="new_book">Add a new book</string>
+    <string name="edit_book">Edit book</string>
+    <string name="edit_quantity">Please insert stock quantity</string>
+    <string name="please_insert_data">Please insert Book Info!</string>
+    <string name="please_check_data">There\'s information missing!</string>
+    <string name="new_book_failed">Book not added</string>
+    <string name="book_added">New Book Inserted!</string>
+    <string name="edit_book_success">Book Updated!</string>
+    <string name="edit_book_fail">Book not Updated</string>
+    <string name="unsaved_changes">Do you want to discard your changes?</string>
+    <string name="discard">Discard</string>
+    <string name="keep_edit">Back to Editing</string>
+    <string name="delete_book">Delete this item?</string>
+    <string name="cancel">Cancel</string>
+    <string name="delete">Delete</string>
+    <string name="delete_book_failed">Couldn\'t delete book</string>
+    <string name="delete_book_succes">Book deleted</string>
+    <string name="order">Order of:</string>
+    <string name="email_book">book</string>
+    <string name="body01">Dear</string>
+    <string name="body02">We would like to order</string>
+    <string name="body03"> book from you.</string>
+    <!-- book_edit -->
+    <string name="book_info">Book information</string>
+    <string name="book_name_book_edit">Book\'s name</string>
+    <string name="name_of_the_book">Book\'s name</string>
+    <string name="books_genre">Book\'s Genre</string>
+    <string name="price">Price</string>
+    <string name="price_of_book">Price of the book</string>
+    <string name="currency_symbol">€</string>
+    <string name="book_in_stock">In stock</string>
+    <string name="decrease">minus</string>
+    <string name="supplier_info">Supplier information</string>
+    <string name="supplier">Supplier Name</string>
+    <string name="supplier_book_name">supplier\'s name</string>
+    <string name="supplier_phone">Phone</string>
+    <string name="supplier_phone_number">supplier phone number</string>
+    <string name="phone_button">phone</string>
+    <string name="e_mail">E-mail</string>
+    <string name="supplier_book_email_address">Supplier\'s email address</string>
+    <string name="email_button">email button</string>
+    <string name="plus">plus</string>
+    <!-- list_item -->
+    <string name="name_placeholder">name placeholder</string>
+    <string name="price_placeholder">price placeholder</string>
+    <string name="stock_placeholder">stock placeholder</string>
+    <string name="selling_icon">selling icon</string>
+    <string name="image">image</string>
+    <!-- main_activity -->
+    <string name="default_information">There\'s no current books \n Please add some!</string>
+    <string name="delete_books">delete all entries</string>
+    <!-- menu -->
+    <string name="save">save</string>
+</resources>

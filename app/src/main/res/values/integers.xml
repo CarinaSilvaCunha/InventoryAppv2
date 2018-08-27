@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <integer name="dummy_book_price">10</integer>
+    <integer name="dummy_book_quantity">50</integer>
+</resources>

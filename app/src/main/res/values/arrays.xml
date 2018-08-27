@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="array_book_genres">
+        <item>@string/genre_science_fiction</item>
+        <item>@string/genre_drama</item>
+        <item>@string/genre_romance</item>
+        <item>@string/genre_horror</item>
+        <item>@string/genre_self_help</item>
+        <item>@string/genre_travel</item>
+        <item>@string/genre_not_available</item>
+    </string-array>
+</resources>

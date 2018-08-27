@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    style="@style/scroll_view_book_edit">
+    <LinearLayout style="@style/linear_layout_01">
+        <TextView
+            android:text="@string/book_info"
+            style="@style/text_view_01" />
+        <LinearLayout style="@style/linear_layout_02">
+            <TextView
+                android:text="@string/book_name_book_edit"
+                style="@style/text_view_02" />
+            <EditText
+                android:id="@+id/edit_book_name"
+                android:hint="@string/name_of_the_book"
+                style="@style/edit_book_name" />
+        </LinearLayout>
+        <LinearLayout style="@style/linear_layout_03">
+            <TextView
+                android:text="@string/books_genre"
+                style="@style/text_view_03" />
+            <Spinner
+                android:id="@+id/edit_book_genre"
+                android:hint="@string/books_genre"
+                style="@style/spinner" />
+        </LinearLayout>
+        <LinearLayout style="@style/linear_layout_04">
+            <TextView
+                android:text="@string/price"
+                style="@style/text_view_04" />
+            <EditText
+                android:id="@+id/edit_book_price"
+                android:hint="@string/price_of_book"
+                style="@style/edit_text_01" />
+            <TextView
+                android:text="@string/currency_symbol"
+                style="@style/text_view_05" />
+        </LinearLayout>
+        <LinearLayout style="@style/linear_layout_05">
+            <TextView
+                android:text="@string/book_in_stock"
+                style="@style/text_view_06" />
+            <ImageButton
+                android:id="@+id/decrease_stock"
+                android:src="@drawable/book_decrease"
+                style="@style/image_button_01" />
+            <EditText
+                android:id="@+id/edit_book_quantity"
+                android:text="0"
+                style="@style/edit_text_02" />
+            <ImageButton
+                android:id="@+id/increase_stock"
+                android:src="@drawable/book_increase"
+                style="@style/image_button_02" />
+        </LinearLayout>
+        <TextView
+            android:text="@string/supplier_info"
+            style="@style/text_view_07" />
+        <LinearLayout style="@style/linear_layout_06">
+            <TextView
+                android:text="@string/supplier"
+                style="@style/text_view_08" />
+            <EditText
+                android:id="@+id/edit_book_supplier"
+                android:hint="@string/supplier_book_name"
+                style="@style/edit_text_03" />
+        </LinearLayout>
+        <LinearLayout style="@style/linear_layout_07">
+            <TextView
+                android:text="@string/supplier_phone"
+                style="@style/text_view_09" />
+            <EditText
+                android:id="@+id/edit_book_supplier_phone"
+                android:hint="@string/supplier_phone_number"
+                tools:text="+351914578360"
+                style="@style/edit_text_04" />
+            <ImageButton
+                android:id="@+id/phoneButton"
+                android:src="@drawable/book_phone"
+                style="@style/image_button_03" />
+        </LinearLayout>
+        <LinearLayout style="@style/linear_layout_08">
+            <TextView
+                android:text="@string/e_mail"
+                style="@style/text_view_10" />
+            <EditText
+                android:id="@+id/edit_book_supplier_email"
+                android:hint="@string/supplier_book_email_address"
+                style="@style/edit_text_05" />
+            <ImageButton
+                android:id="@+id/emailButton"
+                android:src="@drawable/book_email"
+                style="@style/image_button_04" />
+        </LinearLayout>
+    </LinearLayout>
+</ScrollView>
