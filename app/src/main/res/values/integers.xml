@@ -2,4 +2,10 @@
 <resources>
     <integer name="dummy_book_price">10</integer>
     <integer name="dummy_book_quantity">50</integer>
+    <integer name="linear_layout_value_1">1</integer>
+    <integer name="linear_layout_value_2">2</integer>
+    <integer name="linear_layout_value_3">3</integer>
+    <integer name="maxLength50">50</integer>
+    <integer name="maxLength30">30</integer>
+    <integer name="maxLength3">3</integer>
 </resources>

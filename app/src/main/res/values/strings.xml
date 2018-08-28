@@ -17,15 +17,17 @@
     <!-- Dummy Data -->
     <string name="dummy_book_name">The Man Who Mistook His Wife for a Hat</string>
     <string name="dummy_book_supplier">Pan MacMillan</string>
-    <string name="dummy_book_supplier_email">oliver@sacks.com</string>
+    <string name="dummy_book_supplier_email">Oliver@sacks.com</string>
     <!-- list_item -->
-    <string name="sell_book">selling icon</string>
+    <string name="sell_book">Selling icon</string>
     <string name="dummy_supplier_phone_number">914578360</string>
     <!-- bookStoreEditor -->
     <string name="new_book">Add a new book</string>
     <string name="edit_book">Edit book</string>
     <string name="edit_quantity">Please insert stock quantity</string>
-    <string name="please_insert_data">Please insert Book Info!</string>
+    <string name="please_insert_data">All fields are empty! \n Please insert Book info!</string>
+    <string name="error_field">There\'s something wrong in this field! \n Please check the inserted information.</string>
+    <string name="parce_error">Something went wrong! \n Please check the inserted information.</string>
     <string name="please_check_data">There\'s information missing!</string>
     <string name="new_book_failed">Book not added</string>
     <string name="book_added">New Book Inserted!</string>
@@ -44,6 +46,8 @@
     <string name="body01">Dear</string>
     <string name="body02">We would like to order</string>
     <string name="body03"> book from you.</string>
+    <string name="cell_phone_number">Please insert a valid phone number!</string>
+    <string name="email_empty">Please insert a valid e-mail!</string>
     <!-- book_edit -->
     <string name="book_info">Book information</string>
     <string name="book_name_book_edit">Book\'s name</string>
@@ -56,23 +60,25 @@
     <string name="decrease">minus</string>
     <string name="supplier_info">Supplier information</string>
     <string name="supplier">Supplier Name</string>
-    <string name="supplier_book_name">supplier\'s name</string>
+    <string name="supplier_book_name">Supplier\'s name</string>
     <string name="supplier_phone">Phone</string>
-    <string name="supplier_phone_number">supplier phone number</string>
+    <string name="supplier_phone_number">Supplier phone number</string>
     <string name="phone_button">phone</string>
     <string name="e_mail">E-mail</string>
     <string name="supplier_book_email_address">Supplier\'s email address</string>
     <string name="email_button">email button</string>
-    <string name="plus">plus</string>
+    <string name="button">button</string>
+    <string name="placeholder">0</string>
+
     <!-- list_item -->
-    <string name="name_placeholder">name placeholder</string>
-    <string name="price_placeholder">price placeholder</string>
-    <string name="stock_placeholder">stock placeholder</string>
-    <string name="selling_icon">selling icon</string>
-    <string name="image">image</string>
+    <string name="name_placeholder">Name placeholder</string>
+    <string name="price_placeholder">Price placeholder</string>
+    <string name="stock_placeholder">Stock placeholder</string>
+    <string name="selling_icon">Selling icon</string>
+    <string name="image">Image</string>
     <!-- main_activity -->
     <string name="default_information">There\'s no current books \n Please add some!</string>
-    <string name="delete_books">delete all entries</string>
+    <string name="delete_books">Delete all entries</string>
     <!-- menu -->
-    <string name="save">save</string>
+    <string name="save">Save</string>
 </resources>

@@ -5,19 +5,19 @@
     style="@style/relative_layout_main">
     <ListView
         android:id="@+id/book_list"
-        style="@style/list_view_main" />
-
+        style="@style/book_list" />
     <!-- Default Layout -->
     <RelativeLayout
         android:id="@+id/default_view"
-        style="@style/relative_layout_02">
+        style="@style/relative_layout_main">
         <TextView
+            android:id="@+id/default_information"
             android:text="@string/default_information"
-            style="@style/text_view_main" />
+            style="@style/default_information" />
     </RelativeLayout>
 
     <android.support.design.widget.FloatingActionButton
         android:id="@+id/floating_action_button"
         android:src="@drawable/android_books"
-        style="@style/FloatingActionButton" />
+        style="@style/floating_action_button" />
 </RelativeLayout>

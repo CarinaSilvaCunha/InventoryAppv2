@@ -1,5 +1,6 @@
 package com.example.carinacunha.inventoryappv2;
 
+import android.Manifest;
 import android.annotation.SuppressLint;
 import android.app.AlertDialog;
 import android.app.LoaderManager;
@@ -8,10 +9,12 @@ import android.content.CursorLoader;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.Loader;
+import android.content.pm.PackageManager;
 import android.database.Cursor;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.NavUtils;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.text.TextUtils;
 import android.view.Menu;
@@ -139,7 +142,7 @@ public class BookStoreEditor extends AppCompatActivity implements LoaderManager.
         });
 
         // This is the button to e-mail
-        final ImageButton emailSupplier = findViewById(id.emailButton);
+        ImageButton emailSupplier = findViewById(id.emailButton);
         emailSupplier.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -159,7 +162,9 @@ public class BookStoreEditor extends AppCompatActivity implements LoaderManager.
                 orderBookByPhone(supplierNumber);
             }
         });
+
         bookGenreSpinner();
+
     }
 
 
@@ -206,53 +211,19 @@ public class BookStoreEditor extends AppCompatActivity implements LoaderManager.
      * Save Book Edition
      * This will read the input, trim and save information
      * Will check if fields are empty or not and give warning message
+     * After Review Note: There needs to be validation of the fields to check if they're valid
+     * Extra validation steps inserted. Fixed validation if all fields are empty and added an extra validation if there's too many characters
      */
     private boolean saveBook() {
+        if (!validateEditTextToString()) {
+            return false;
+        }
         String saveBookName = bookName.getText().toString().trim();
         String saveBookPrice = bookPrice.getText().toString().trim();
         String saveBookQuantity = bookQuantity.getText().toString().trim();
         String saveBookSupplier = bookSupplier.getText().toString().trim();
         String saveBookPhone = bookSupplierPhone.getText().toString().trim();
         String saveBookEmail = bookSupplierEmail.getText().toString().trim();
-
-        if (currentBook == null && TextUtils.isEmpty(saveBookName) && TextUtils.isEmpty(saveBookPrice) && TextUtils.isEmpty(saveBookQuantity) && TextUtils.isEmpty(saveBookSupplier) &&
-                TextUtils.isEmpty(saveBookPhone) && TextUtils.isEmpty(saveBookEmail)) {
-            Toast.makeText(this, (getString(string.please_insert_data)), Toast.LENGTH_SHORT).show();
-            return false;
-        }
-
-        if (TextUtils.isEmpty(saveBookName)) {
-            bookName.setError(getString(string.please_check_data));
-            return false;
-        }
-
-        if (TextUtils.isEmpty(saveBookPrice)) {
-            bookPrice.setError(getString(string.please_check_data));
-            return false;
-        }
-
-        if (TextUtils.isEmpty(saveBookQuantity)) {
-            bookQuantity.setError(getString(string.please_check_data));
-            return false;
-        }
-
-        if (TextUtils.isEmpty(saveBookSupplier)) {
-            bookSupplier.setError(getString(string.please_check_data));
-            return false;
-
-        }
-
-        if (TextUtils.isEmpty(saveBookPhone)) {
-            bookSupplierPhone.setError(getString(string.please_check_data));
-            return false;
-
-        }
-
-        if (TextUtils.isEmpty(saveBookEmail)) {
-            bookSupplierEmail.setError(getString(string.please_check_data));
-            return false;
-
-        }
 
         Double bookPriceDouble = Double.parseDouble(saveBookPrice);
         int bookQuantityInt = Integer.parseInt(saveBookQuantity);
@@ -282,6 +253,52 @@ public class BookStoreEditor extends AppCompatActivity implements LoaderManager.
                 Toast.makeText(this, getString(string.edit_book_success), Toast.LENGTH_SHORT).show();
             }
             finish();
+        }
+        return true;
+    }
+
+    public boolean validateEditTextToString() {
+        String saveBookName = bookName.getText().toString().trim();
+        String saveBookPrice = bookPrice.getText().toString().trim();
+        String saveBookQuantity = bookQuantity.getText().toString().trim();
+        String saveBookSupplier = bookSupplier.getText().toString().trim();
+        String saveBookPhone = bookSupplierPhone.getText().toString().trim();
+        String saveBookEmail = bookSupplierEmail.getText().toString().trim();
+
+        if (currentBook == null && TextUtils.isEmpty(saveBookName) && TextUtils.isEmpty(saveBookPrice) && saveBookQuantity.equals("0") && TextUtils.isEmpty(saveBookSupplier) &&
+                TextUtils.isEmpty(saveBookPhone) && TextUtils.isEmpty(saveBookEmail)) {
+            Toast.makeText(this, (getString(string.please_insert_data)), Toast.LENGTH_SHORT).show();
+            return false;
+        }
+
+        if (TextUtils.isEmpty(saveBookName) || saveBookName.length() > 50) {
+            bookName.setError(getString(string.please_check_data));
+            return false;
+        }
+
+        if (TextUtils.isEmpty(saveBookPrice) || saveBookPrice.length() > 3) {
+            bookPrice.setError(getString(string.please_check_data));
+            return false;
+        }
+
+        if (TextUtils.isEmpty(saveBookQuantity) || saveBookQuantity.length() > 3) {
+            bookQuantity.setError(getString(string.please_check_data));
+            return false;
+        }
+
+        if (TextUtils.isEmpty(saveBookSupplier) || saveBookSupplier.length() > 50) {
+            bookSupplier.setError(getString(string.please_check_data));
+            return false;
+        }
+
+        if (TextUtils.isEmpty(saveBookPhone) || saveBookPhone.length() > 30) {
+            bookSupplierPhone.setError(getString(string.please_check_data));
+            return false;
+        }
+
+        if (TextUtils.isEmpty(saveBookEmail) || saveBookEmail.length() > 50) {
+            bookSupplierEmail.setError(getString(string.please_check_data));
+            return false;
         }
         return true;
     }
@@ -317,7 +334,7 @@ public class BookStoreEditor extends AppCompatActivity implements LoaderManager.
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case id.action_save:
-                boolean saved =  saveBook();
+                boolean saved = saveBook();
                 if (saved) {
                     finish();
                 }
@@ -514,32 +531,45 @@ public class BookStoreEditor extends AppCompatActivity implements LoaderManager.
 
     /**
      * Send a book order by email to supplier
+     * Edit: Added permission request in runtime
      */
     private void orderBookByEmail(String emailAddress, String bookName, String supplier) {
-        String subject = getString(string.order) + " " + bookName + " " + getString(string.email_book);
+        if (!emailAddress.isEmpty()) {
+            String subject = getString(string.order) + " " + bookName + " " + getString(string.email_book);
+            String emailBody = getString((string.body01)) + " " + supplier + ",";
+            emailBody = emailBody + "\n" + getString((string.body02)) + " " + bookName + " " + getString((string.body03));
 
-        String emailBody = getString((string.body01)) + " " + supplier + ",";
-        emailBody = emailBody + "\n" + getString((string.body02)) + " " + bookName + " " + getString((string.body03));
-
-        Intent intent = new Intent(Intent.ACTION_SENDTO);
-        intent.setType("text/plain");
-        intent.setData(Uri.parse("mailto:"));
-        intent.putExtra(android.content.Intent.EXTRA_EMAIL, new String[]{emailAddress});
-        intent.putExtra(Intent.EXTRA_SUBJECT, subject);
-        intent.putExtra(Intent.EXTRA_TEXT, emailBody);
-        if (intent.resolveActivity(getPackageManager()) != null) {
-            startActivity(intent);
+            Intent sendEmail = new Intent(Intent.ACTION_SENDTO);
+            sendEmail.setType("text/plain");
+            sendEmail.setData(Uri.parse("mailto:"));
+            sendEmail.putExtra(android.content.Intent.EXTRA_EMAIL, new String[]{emailAddress});
+            sendEmail.putExtra(Intent.EXTRA_SUBJECT, subject);
+            sendEmail.putExtra(Intent.EXTRA_TEXT, emailBody);
+            if (sendEmail.resolveActivity(getPackageManager()) != null) {
+                startActivity(sendEmail);
+            }
+        } else {
+            Toast.makeText(BookStoreEditor.this, string.email_empty, Toast.LENGTH_SHORT).show();
         }
     }
 
+
     /**
-     * Call book supplier
+     *  Call book supplier
+     *  Edit: Added permission request in runtime
      **/
     private void orderBookByPhone(String phoneNumber) {
-        Intent intent = new Intent(Intent.ACTION_DIAL);
-        intent.setData(Uri.parse("Phone:" + phoneNumber));
-        if (intent.resolveActivity(getPackageManager()) != null) {
-            startActivity(intent);
+        if (!phoneNumber.isEmpty()) {
+            if (ContextCompat.checkSelfPermission(this, Manifest.permission.CALL_PHONE) != PackageManager.PERMISSION_GRANTED) {
+                Intent callSupplier = new Intent(Intent.ACTION_DIAL);
+                callSupplier.setData(Uri.parse("tel:" + phoneNumber));
+                if (callSupplier.resolveActivity(getPackageManager()) != null) {
+                    startActivity(callSupplier);
+                }
+            }
+        } else {
+            Toast.makeText(BookStoreEditor.this, string.cell_phone_number, Toast.LENGTH_SHORT).show();
         }
     }
 }
+

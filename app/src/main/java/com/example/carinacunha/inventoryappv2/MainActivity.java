@@ -8,9 +8,9 @@ import android.content.Intent;
 import android.content.Loader;
 import android.database.Cursor;
 import android.net.Uri;
+import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -46,19 +46,23 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
                 startActivity(onFloatingButtonClick);
             }
         });
-        View default_view = findViewById(R.id.default_view);
+        // Set the book list view
         ListView book_list = findViewById(R.id.book_list);
+        // set the default view for empty lists
+        View default_view = findViewById(R.id.default_view);
         book_list.setEmptyView(default_view);
-
+        // set the adapter to create a list for each row
         bookAdapter = new BookCursorAdapter(this, null);
         book_list.setAdapter(bookAdapter);
+
+        // set the onclicklistener for the item
         book_list.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int position, long id) {
-                Intent intent = new Intent(MainActivity.this, BookStoreEditor.class);
+                Intent bookClickIntent = new Intent(MainActivity.this, BookStoreEditor.class);
                 Uri currentBookURI = ContentUris.withAppendedId(BookEntry.CONTENT_URI, id);
-                intent.setData(currentBookURI);
-                startActivity(intent);
+                bookClickIntent.setData(currentBookURI);
+                startActivity(bookClickIntent);
             }
         });
         getLoaderManager().initLoader(BOOK_LOADER, null, this);

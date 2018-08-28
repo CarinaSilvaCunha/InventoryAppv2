@@ -1,96 +1,139 @@
 <?xml version="1.0" encoding="utf-8"?>
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
-    style="@style/scroll_view_book_edit">
-    <LinearLayout style="@style/linear_layout_01">
+    android:id="@+id/scrollView"
+    style="@style/scrollView">
+
+    <LinearLayout
+        android:id="@+id/match_parent_linear_layout"
+        style="@style/match_parent_linear_layout">
+
         <TextView
-            android:text="@string/book_info"
-            style="@style/text_view_01" />
-        <LinearLayout style="@style/linear_layout_02">
+            android:id="@+id/title_text"
+            style="@style/title_text"
+            android:text="@string/book_info" />
+
+        <LinearLayout
+            android:id="@+id/row_linear_layout"
+            style="@style/row_linear_layout">
+
             <TextView
-                android:text="@string/book_name_book_edit"
-                style="@style/text_view_02" />
+                android:id="@+id/form_text_item"
+                style="@style/form_text_item"
+                android:text="@string/book_name_book_edit" />
+
             <EditText
                 android:id="@+id/edit_book_name"
-                android:hint="@string/name_of_the_book"
-                style="@style/edit_book_name" />
+                style="@style/edit_text"
+                android:hint="@string/name_of_the_book" />
         </LinearLayout>
-        <LinearLayout style="@style/linear_layout_03">
+
+        <LinearLayout style="@style/row_linear_layout">
+
             <TextView
-                android:text="@string/books_genre"
-                style="@style/text_view_03" />
+                style="@style/form_text_item"
+                android:text="@string/books_genre" />
+
             <Spinner
                 android:id="@+id/edit_book_genre"
-                android:hint="@string/books_genre"
-                style="@style/spinner" />
+                style="@style/edit_book_genre"
+                android:hint="@string/books_genre" />
         </LinearLayout>
-        <LinearLayout style="@style/linear_layout_04">
+
+        <LinearLayout style="@style/row_linear_layout">
+
             <TextView
-                android:text="@string/price"
-                style="@style/text_view_04" />
+                style="@style/form_text_item"
+                android:text="@string/price" />
+
             <EditText
                 android:id="@+id/edit_book_price"
+                style="@style/edit_text_alt"
                 android:hint="@string/price_of_book"
-                style="@style/edit_text_01" />
+                android:inputType="numberDecimal" />
+
             <TextView
-                android:text="@string/currency_symbol"
-                style="@style/text_view_05" />
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:text="@string/currency_symbol" />
         </LinearLayout>
-        <LinearLayout style="@style/linear_layout_05">
+
+        <LinearLayout style="@style/row_linear_layout">
+
             <TextView
-                android:text="@string/book_in_stock"
-                style="@style/text_view_06" />
+                style="@style/form_text_item"
+                android:text="@string/book_in_stock" />
+
             <ImageButton
                 android:id="@+id/decrease_stock"
-                android:src="@drawable/book_decrease"
-                style="@style/image_button_01" />
+                style="@style/image_button"
+                android:src="@drawable/book_decrease" />
+
             <EditText
                 android:id="@+id/edit_book_quantity"
-                android:text="0"
-                style="@style/edit_text_02" />
+                style="@style/edit_text_alt"
+                android:gravity="center"
+                android:inputType="numberDecimal"
+                android:text="@string/placeholder" />
+
             <ImageButton
                 android:id="@+id/increase_stock"
-                android:src="@drawable/book_increase"
-                style="@style/image_button_02" />
+                style="@style/image_button"
+                android:src="@drawable/book_increase" />
         </LinearLayout>
+
         <TextView
-            android:text="@string/supplier_info"
-            style="@style/text_view_07" />
-        <LinearLayout style="@style/linear_layout_06">
+            style="@style/title_text"
+            android:text="@string/supplier_info" />
+
+        <LinearLayout style="@style/row_linear_layout">
+
             <TextView
-                android:text="@string/supplier"
-                style="@style/text_view_08" />
+                style="@style/form_text_item"
+                android:text="@string/supplier" />
+
             <EditText
                 android:id="@+id/edit_book_supplier"
-                android:hint="@string/supplier_book_name"
-                style="@style/edit_text_03" />
+                style="@style/edit_text"
+                android:hint="@string/supplier_book_name" />
         </LinearLayout>
-        <LinearLayout style="@style/linear_layout_07">
+
+        <LinearLayout style="@style/row_linear_layout">
+
             <TextView
-                android:text="@string/supplier_phone"
-                style="@style/text_view_09" />
+                style="@style/form_text_item"
+                android:text="@string/supplier_phone" />
+
             <EditText
                 android:id="@+id/edit_book_supplier_phone"
+                style="@style/edit_text_alt"
+                android:inputType="phone"
                 android:hint="@string/supplier_phone_number"
-                tools:text="+351914578360"
-                style="@style/edit_text_04" />
+                android:maxLength="30" />
+
             <ImageButton
                 android:id="@+id/phoneButton"
-                android:src="@drawable/book_phone"
-                style="@style/image_button_03" />
+                style="@style/image_button"
+                android:src="@drawable/book_phone" />
         </LinearLayout>
-        <LinearLayout style="@style/linear_layout_08">
+
+        <LinearLayout style="@style/row_linear_layout">
+
             <TextView
-                android:text="@string/e_mail"
-                style="@style/text_view_10" />
+                style="@style/form_text_item"
+                android:text="@string/e_mail" />
+
             <EditText
                 android:id="@+id/edit_book_supplier_email"
+                style="@style/edit_text_alt"
+                android:inputType="textEmailAddress"
                 android:hint="@string/supplier_book_email_address"
-                style="@style/edit_text_05" />
+                android:maxLength="30" />
+
             <ImageButton
                 android:id="@+id/emailButton"
-                android:src="@drawable/book_email"
-                style="@style/image_button_04" />
+                style="@style/image_button"
+                android:src="@drawable/book_email" />
         </LinearLayout>
     </LinearLayout>
 </ScrollView>
