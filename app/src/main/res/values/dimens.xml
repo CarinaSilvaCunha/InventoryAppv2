@@ -11,7 +11,7 @@
     <dimen name="image_height">50dp</dimen>
     <dimen name="margin_ten">10dp</dimen>
     <dimen name="margin_twenty">20dp</dimen>
-    <dimen name="maxHeight">30dp</dimen>
+    <dimen name="minHeight">65dp</dimen>
     <dimen name="linear_height">35dp</dimen>
     <item name="image_linear" format="float" type="dimen">0.3</item>
 </resources>

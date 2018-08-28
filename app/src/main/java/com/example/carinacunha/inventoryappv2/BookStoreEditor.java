@@ -225,6 +225,7 @@ public class BookStoreEditor extends AppCompatActivity implements LoaderManager.
         String saveBookPhone = bookSupplierPhone.getText().toString().trim();
         String saveBookEmail = bookSupplierEmail.getText().toString().trim();
 
+        // there's a try catch validation on validateEditTextToString()
         Double bookPriceDouble = Double.parseDouble(saveBookPrice);
         int bookQuantityInt = Integer.parseInt(saveBookQuantity);
         int bookSupplierNumberInt = Integer.parseInt(saveBookPhone);
@@ -298,6 +299,27 @@ public class BookStoreEditor extends AppCompatActivity implements LoaderManager.
 
         if (TextUtils.isEmpty(saveBookEmail) || saveBookEmail.length() > 50) {
             bookSupplierEmail.setError(getString(string.please_check_data));
+            return false;
+        }
+
+        try {
+            int bookSupplierNumberInt = Integer.parseInt(saveBookPhone);
+        } catch (NumberFormatException e) {
+            bookSupplierPhone.setError(getString(string.phone_error));
+            return false;
+        }
+
+        try {
+            Double bookPriceDouble = Double.parseDouble(saveBookPrice);
+        } catch (NumberFormatException e) {
+            bookPrice.setError(getString(string.price_error));
+            return false;
+        }
+
+        try {
+            int bookQuantityInt = Integer.parseInt(saveBookQuantity);
+        } catch (NumberFormatException e) {
+            bookQuantity.setError(getString(string.quantity_error));
             return false;
         }
         return true;

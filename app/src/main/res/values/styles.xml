@@ -429,22 +429,22 @@
         <item name="android:descendantFocusability">blocksDescendants</item>
         <item name="android:background">?android:selectableItemBackground</item>
         <item name="android:orientation">horizontal</item>
-        <item name="android:maxHeight">@dimen/maxHeight</item>
     </style>
 
     <style name="book_info_list">
         <item name="android:layout_height">wrap_content</item>
         <item name="android:layout_gravity">center</item>
+        <item name="android:minHeight">@dimen/minHeight</item>
         <item name="android:layout_margin">@dimen/margin_ten</item>
         <item name="android:layout_width">@dimen/linear_zero</item>
-        <item name="android:layout_weight">@integer/linear_layout_value_3</item>
+        <item name="android:layout_weight">@integer/linear_layout_value_4</item>
         <item name="android:orientation">vertical</item>
     </style>
 
     <style name="book_name">
         <item name="android:layout_height">@dimen/linear_zero</item>
         <item name="android:layout_width">wrap_content</item>
-        <item name="android:layout_weight">@integer/linear_layout_value_1</item>
+        <item name="android:layout_weight">@integer/linear_layout_value_2</item>
     </style>
 
     <style name="book_price">

@@ -33,6 +33,9 @@
     <string name="book_added">New Book Inserted!</string>
     <string name="edit_book_success">Book Updated!</string>
     <string name="edit_book_fail">Book not Updated</string>
+    <string name="price_error">Price unsupported. \n Please contact support!</string>
+    <string name="quantity_error">Quantity unsupported. \n Please contact support!</string>
+    <string name="phone_error">Phone number unsupported. \n Please contact support!</string>
     <string name="unsaved_changes">Do you want to discard your changes?</string>
     <string name="discard">Discard</string>
     <string name="keep_edit">Back to Editing</string>
