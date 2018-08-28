@@ -31,6 +31,9 @@ import android.widget.Toast;
 import com.example.carinacunha.inventoryappv2.BookStoreDatabase.DatabaseContract;
 import com.example.carinacunha.inventoryappv2.BookStoreDatabase.DatabaseContract.BookEntry;
 
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
 import static com.example.carinacunha.inventoryappv2.R.array;
 import static com.example.carinacunha.inventoryappv2.R.id;
 import static com.example.carinacunha.inventoryappv2.R.layout;
@@ -214,6 +217,19 @@ public class BookStoreEditor extends AppCompatActivity implements LoaderManager.
         return android.util.Patterns.EMAIL_ADDRESS.matcher(bookSupplierEmail).matches();
     }
 
+    public final static boolean isValidPrice(String bookPrice) {
+        String pattern = "^\\d{0,8}(\\.\\d{1,4})?$";
+        Pattern r = Pattern.compile(pattern);
+        Matcher m = r.matcher(bookPrice);
+        if (m.matches()) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+
+
     /**
      * Save Book Edition
      * This will read the input, trim and save information
@@ -232,14 +248,12 @@ public class BookStoreEditor extends AppCompatActivity implements LoaderManager.
         String saveBookPhone = bookSupplierPhone.getText().toString().trim();
         String saveBookEmail = bookSupplierEmail.getText().toString().trim();
 
-        // there's a try catch validation on validateEditTextToString()
-        Double bookPriceDouble = Double.parseDouble(saveBookPrice);
         int bookQuantityInt = Integer.parseInt(saveBookQuantity);
 
         ContentValues values = new ContentValues();
         values.put(BookEntry.COLUMN_NAME, saveBookName);
         values.put(BookEntry.COLUMN_GENRE, genre);
-        values.put(BookEntry.COLUMN_PRICE, bookPriceDouble);
+        values.put(BookEntry.COLUMN_PRICE, saveBookPrice);
         values.put(BookEntry.COLUMN_QUANTITY, bookQuantityInt);
         values.put(BookEntry.COLUMN_SUPPLIER, saveBookSupplier);
         values.put(BookEntry.COLUMN_SUPPLIER_PHONE, saveBookPhone);
@@ -378,11 +392,12 @@ public class BookStoreEditor extends AppCompatActivity implements LoaderManager.
             return false;
         }
 
-        if (TextUtils.isEmpty(saveBookPrice) || saveBookPrice.length() > 3) {
-            bookPrice.setError(getString(string.please_check_data));
+        if (TextUtils.isEmpty(saveBookPrice) || saveBookPrice.length() > 5 || !isValidPrice(saveBookPrice)) {
+            bookPrice.setError(getString(string.invalid_price));
             return false;
         }
 
+        // Allows zero because you might want to add only the details of the supplier
         if (TextUtils.isEmpty(saveBookQuantity) || saveBookQuantity.length() > 3) {
             bookQuantity.setError(getString(string.please_check_data));
             return false;
@@ -400,13 +415,6 @@ public class BookStoreEditor extends AppCompatActivity implements LoaderManager.
 
         if (TextUtils.isEmpty(saveBookEmail) || saveBookEmail.length() > 50 || !isValidEmail(saveBookEmail)) {
             bookSupplierEmail.setError(getString(string.invalid_email));
-            return false;
-        }
-
-        try {
-            Double bookPriceDouble = Double.parseDouble(saveBookPrice);
-        } catch (NumberFormatException e) {
-            bookPrice.setError(getString(string.price_error));
             return false;
         }
 
@@ -554,14 +562,14 @@ public class BookStoreEditor extends AppCompatActivity implements LoaderManager.
 
             final String name = cursor.getString(bookNameColumnIndex);
             int genre = cursor.getInt(bookGenreColumnIndex);
-            double price = cursor.getInt(bookPriceColumnIndex);
+            final String price = cursor.getString(bookPriceColumnIndex);
             int quantity = cursor.getInt(bookQuantityColumnIndex);
             final String supplier = cursor.getString(bookSupplierColumnIndex);
             final String phone = cursor.getString(bookPhoneColumnIndex);
             final String email = cursor.getString(bookEmailColumnIndex);
 
             bookName.setText(name);
-            bookPrice.setText(Double.toString(price));
+            bookPrice.setText(price);
             bookQuantity.setText(Integer.toString(quantity));
             bookSupplier.setText(supplier);
             bookSupplierPhone.setText(phone);
@@ -593,6 +601,7 @@ public class BookStoreEditor extends AppCompatActivity implements LoaderManager.
         }
 
     }
+
 
 }
 

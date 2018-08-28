@@ -10,4 +10,5 @@
     <integer name="maxLength30">30</integer>
     <integer name="maxLength15">15</integer>
     <integer name="maxLength3">3</integer>
+    <integer name="maxLength5">5</integer>
 </resources>

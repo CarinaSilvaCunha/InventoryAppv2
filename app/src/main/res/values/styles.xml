@@ -360,7 +360,7 @@
         <item name="android:layout_height">wrap_content</item>
         <item name="android:layout_gravity">center_vertical</item>
         <item name="android:layout_weight">@integer/linear_layout_value_3</item>
-        <item name="android:maxLength">@integer/maxLength3</item>
+        <item name="android:maxLength">@integer/maxLength5</item>
         <item name="android:textSize">@dimen/text_size</item>
         <item name="android:typeface">sans</item>
     </style>

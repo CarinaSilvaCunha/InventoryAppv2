@@ -30,6 +30,7 @@
     <string name="parce_error">Something went wrong! \n Please check the inserted information.</string>
     <string name="please_check_data">There\'s information missing!</string>
     <string name="invalid_email">Invalid e-mail format!</string>
+    <string name="invalid_price">Invalid price, please try 00.00 format!</string>
     <string name="new_book_failed">Book not added</string>
     <string name="book_added">New Book Inserted!</string>
     <string name="edit_book_success">Book Updated!</string>
@@ -58,7 +59,7 @@
     <string name="name_of_the_book">Book\'s name</string>
     <string name="books_genre">Book\'s Genre</string>
     <string name="price">Price</string>
-    <string name="price_of_book">Price of the book</string>
+    <string name="price_of_book">15.00</string>
     <string name="currency_symbol">€</string>
     <string name="book_in_stock">In stock</string>
     <string name="decrease">minus</string>

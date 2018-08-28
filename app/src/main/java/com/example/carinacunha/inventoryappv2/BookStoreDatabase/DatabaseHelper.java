@@ -32,7 +32,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
                 + BookEntry.COLUMN_NAME + " TEXT NOT NULL, "
                 + BookEntry.COLUMN_GENRE + " INTEGER NOT NULL, "
                 + BookEntry.COLUMN_QUANTITY + " INTEGER NOT NULL DEFAULT 0, "
-                + BookEntry.COLUMN_PRICE + " INTEGER NOT NULL DEFAULT 0, "
+                + BookEntry.COLUMN_PRICE + " TEXT NOT NULL DEFAULT 0, "
                 + BookEntry.COLUMN_SUPPLIER + " TEXT NOT NULL, "
                 + BookEntry.COLUMN_SUPPLIER_PHONE + " TEXT NOT NULL DEFAULT 0,"
                 + DatabaseContract.BookEntry.COLUMN_SUPPLIER_EMAIL + " TEXT );";

@@ -107,7 +107,7 @@
             <EditText
                 android:id="@+id/edit_book_supplier_phone"
                 style="@style/edit_text_alt"
-                android:inputType="text"
+                android:inputType="number"
                 android:hint="@string/supplier_phone_number"
                 android:maxLength="@integer/maxLength15" />
 
