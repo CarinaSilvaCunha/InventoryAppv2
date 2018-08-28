@@ -26,17 +26,17 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     }
 
     @Override
-    public void onCreate(SQLiteDatabase db) {
+    public void onCreate(SQLiteDatabase bookStoreDataBase) {
         String createDataBase = "CREATE TABLE " + BookEntry.TABLE_NAME + " ("
                 + BookEntry._ID + " INTEGER PRIMARY KEY AUTOINCREMENT, "
                 + BookEntry.COLUMN_NAME + " TEXT NOT NULL, "
                 + BookEntry.COLUMN_GENRE + " INTEGER NOT NULL, "
-                + DatabaseContract.BookEntry.COLUMN_QUANTITY + " INTEGER NOT NULL DEFAULT 0, "
-                + DatabaseContract.BookEntry.COLUMN_PRICE + " INTEGER NOT NULL DEFAULT 0, "
+                + BookEntry.COLUMN_QUANTITY + " INTEGER NOT NULL DEFAULT 0, "
+                + BookEntry.COLUMN_PRICE + " INTEGER NOT NULL DEFAULT 0, "
                 + BookEntry.COLUMN_SUPPLIER + " TEXT NOT NULL, "
-                + BookEntry.COLUMN_SUPPLIER_PHONE + " INTEGER NOT NULL DEFAULT 0,"
+                + BookEntry.COLUMN_SUPPLIER_PHONE + " TEXT NOT NULL DEFAULT 0,"
                 + DatabaseContract.BookEntry.COLUMN_SUPPLIER_EMAIL + " TEXT );";
-        db.execSQL(createDataBase);
+        bookStoreDataBase.execSQL(createDataBase);
     }
 
     /**

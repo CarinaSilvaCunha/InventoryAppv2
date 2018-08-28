@@ -107,9 +107,9 @@
             <EditText
                 android:id="@+id/edit_book_supplier_phone"
                 style="@style/edit_text_alt"
-                android:inputType="phone"
+                android:inputType="text"
                 android:hint="@string/supplier_phone_number"
-                android:maxLength="15" />
+                android:maxLength="@integer/maxLength15" />
 
             <ImageButton
                 android:id="@+id/phoneButton"
@@ -128,7 +128,7 @@
                 style="@style/edit_text_alt"
                 android:inputType="textEmailAddress"
                 android:hint="@string/supplier_book_email_address"
-                android:maxLength="20" />
+                android:maxLength="@integer/maxLength50" />
 
             <ImageButton
                 android:id="@+id/emailButton"

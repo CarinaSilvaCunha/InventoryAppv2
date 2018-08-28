@@ -29,6 +29,7 @@
     <string name="error_field">There\'s something wrong in this field! \n Please check the inserted information.</string>
     <string name="parce_error">Something went wrong! \n Please check the inserted information.</string>
     <string name="please_check_data">There\'s information missing!</string>
+    <string name="invalid_email">Invalid e-mail format!</string>
     <string name="new_book_failed">Book not added</string>
     <string name="book_added">New Book Inserted!</string>
     <string name="edit_book_success">Book Updated!</string>

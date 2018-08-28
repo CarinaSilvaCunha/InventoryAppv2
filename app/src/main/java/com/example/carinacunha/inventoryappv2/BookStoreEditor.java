@@ -207,6 +207,13 @@ public class BookStoreEditor extends AppCompatActivity implements LoaderManager.
     }
 
 
+    public final static boolean isValidEmail(String bookSupplierEmail) {
+        if (bookSupplierEmail == null)
+            return false;
+
+        return android.util.Patterns.EMAIL_ADDRESS.matcher(bookSupplierEmail).matches();
+    }
+
     /**
      * Save Book Edition
      * This will read the input, trim and save information
@@ -228,7 +235,6 @@ public class BookStoreEditor extends AppCompatActivity implements LoaderManager.
         // there's a try catch validation on validateEditTextToString()
         Double bookPriceDouble = Double.parseDouble(saveBookPrice);
         int bookQuantityInt = Integer.parseInt(saveBookQuantity);
-        int bookSupplierNumberInt = Integer.parseInt(saveBookPhone);
 
         ContentValues values = new ContentValues();
         values.put(BookEntry.COLUMN_NAME, saveBookName);
@@ -236,7 +242,7 @@ public class BookStoreEditor extends AppCompatActivity implements LoaderManager.
         values.put(BookEntry.COLUMN_PRICE, bookPriceDouble);
         values.put(BookEntry.COLUMN_QUANTITY, bookQuantityInt);
         values.put(BookEntry.COLUMN_SUPPLIER, saveBookSupplier);
-        values.put(BookEntry.COLUMN_SUPPLIER_PHONE, bookSupplierNumberInt);
+        values.put(BookEntry.COLUMN_SUPPLIER_PHONE, saveBookPhone);
         values.put(BookEntry.COLUMN_SUPPLIER_EMAIL, saveBookEmail);
 
         if (currentBook == null) {
@@ -254,73 +260,6 @@ public class BookStoreEditor extends AppCompatActivity implements LoaderManager.
                 Toast.makeText(this, getString(string.edit_book_success), Toast.LENGTH_SHORT).show();
             }
             finish();
-        }
-        return true;
-    }
-
-    public boolean validateEditTextToString() {
-        String saveBookName = bookName.getText().toString().trim();
-        String saveBookPrice = bookPrice.getText().toString().trim();
-        String saveBookQuantity = bookQuantity.getText().toString().trim();
-        String saveBookSupplier = bookSupplier.getText().toString().trim();
-        String saveBookPhone = bookSupplierPhone.getText().toString().trim();
-        String saveBookEmail = bookSupplierEmail.getText().toString().trim();
-
-        if (currentBook == null && TextUtils.isEmpty(saveBookName) && TextUtils.isEmpty(saveBookPrice) && saveBookQuantity.equals("0") && TextUtils.isEmpty(saveBookSupplier) &&
-                TextUtils.isEmpty(saveBookPhone) && TextUtils.isEmpty(saveBookEmail)) {
-            Toast.makeText(this, (getString(string.please_insert_data)), Toast.LENGTH_SHORT).show();
-            return false;
-        }
-
-        if (TextUtils.isEmpty(saveBookName) || saveBookName.length() > 50) {
-            bookName.setError(getString(string.please_check_data));
-            return false;
-        }
-
-        if (TextUtils.isEmpty(saveBookPrice) || saveBookPrice.length() > 3) {
-            bookPrice.setError(getString(string.please_check_data));
-            return false;
-        }
-
-        if (TextUtils.isEmpty(saveBookQuantity) || saveBookQuantity.length() > 3) {
-            bookQuantity.setError(getString(string.please_check_data));
-            return false;
-        }
-
-        if (TextUtils.isEmpty(saveBookSupplier) || saveBookSupplier.length() > 50) {
-            bookSupplier.setError(getString(string.please_check_data));
-            return false;
-        }
-
-        if (TextUtils.isEmpty(saveBookPhone) || saveBookPhone.length() > 30) {
-            bookSupplierPhone.setError(getString(string.please_check_data));
-            return false;
-        }
-
-        if (TextUtils.isEmpty(saveBookEmail) || saveBookEmail.length() > 50) {
-            bookSupplierEmail.setError(getString(string.please_check_data));
-            return false;
-        }
-
-        try {
-            int bookSupplierNumberInt = Integer.parseInt(saveBookPhone);
-        } catch (NumberFormatException e) {
-            bookSupplierPhone.setError(getString(string.phone_error));
-            return false;
-        }
-
-        try {
-            Double bookPriceDouble = Double.parseDouble(saveBookPrice);
-        } catch (NumberFormatException e) {
-            bookPrice.setError(getString(string.price_error));
-            return false;
-        }
-
-        try {
-            int bookQuantityInt = Integer.parseInt(saveBookQuantity);
-        } catch (NumberFormatException e) {
-            bookQuantity.setError(getString(string.quantity_error));
-            return false;
         }
         return true;
     }
@@ -420,64 +359,65 @@ public class BookStoreEditor extends AppCompatActivity implements LoaderManager.
         return new CursorLoader(this, currentBook, projection, null, null, null);
     }
 
-    /**
-     * This will extract the value from the Cursor and update the views with the values from the database
-     */
-    @Override
-    public void onLoadFinished(Loader<Cursor> loader, Cursor cursor) {
-        if (cursor == null || cursor.getCount() < 1) {
-            return;
+    public boolean validateEditTextToString() {
+        String saveBookName = bookName.getText().toString().trim();
+        String saveBookPrice = bookPrice.getText().toString().trim();
+        String saveBookQuantity = bookQuantity.getText().toString().trim();
+        String saveBookSupplier = bookSupplier.getText().toString().trim();
+        String saveBookPhone = bookSupplierPhone.getText().toString().trim();
+        String saveBookEmail = bookSupplierEmail.getText().toString().trim();
+
+        if (currentBook == null && TextUtils.isEmpty(saveBookName) && TextUtils.isEmpty(saveBookPrice) && saveBookQuantity.equals("0") && TextUtils.isEmpty(saveBookSupplier) &&
+                TextUtils.isEmpty(saveBookPhone) && TextUtils.isEmpty(saveBookEmail)) {
+            Toast.makeText(this, (getString(string.please_insert_data)), Toast.LENGTH_SHORT).show();
+            return false;
         }
 
-        if (cursor.moveToFirst()) {
-            int bookNameColumnIndex = cursor.getColumnIndex(BookEntry.COLUMN_NAME);
-            int bookGenreColumnIndex = cursor.getColumnIndex(BookEntry.COLUMN_GENRE);
-            int bookPriceColumnIndex = cursor.getColumnIndex(BookEntry.COLUMN_PRICE);
-            int bookQuantityColumnIndex = cursor.getColumnIndex(BookEntry.COLUMN_QUANTITY);
-            int bookSupplierColumnIndex = cursor.getColumnIndex(BookEntry.COLUMN_SUPPLIER);
-            int bookPhoneColumnIndex = cursor.getColumnIndex(BookEntry.COLUMN_SUPPLIER_PHONE);
-            int bookEmailColumnIndex = cursor.getColumnIndex(BookEntry.COLUMN_SUPPLIER_EMAIL);
-
-            final String name = cursor.getString(bookNameColumnIndex);
-            int genre = cursor.getInt(bookGenreColumnIndex);
-            double price = cursor.getInt(bookPriceColumnIndex);
-            int quantity = cursor.getInt(bookQuantityColumnIndex);
-            String supplier = cursor.getString(bookSupplierColumnIndex);
-            int phone = cursor.getInt(bookPhoneColumnIndex);
-            final String email = cursor.getString(bookEmailColumnIndex);
-
-            bookName.setText(name);
-            bookPrice.setText(Double.toString(price));
-            bookQuantity.setText(Integer.toString(quantity));
-            bookSupplier.setText(supplier);
-            bookSupplierPhone.setText(Integer.toString(phone));
-            bookSupplierEmail.setText(email);
-            switch (genre) {
-                case BookEntry.GENRE_SCIENCE_FICTION:
-                    bookGenre.setSelection(1);
-                    break;
-                case BookEntry.GENRE_DRAMA:
-                    bookGenre.setSelection(2);
-                    break;
-                case BookEntry.GENRE_ROMANCE:
-                    bookGenre.setSelection(3);
-                    break;
-                case BookEntry.GENRE_HORROR:
-                    bookGenre.setSelection(4);
-                    break;
-                case BookEntry.GENRE_SELF_HELP:
-                    bookGenre.setSelection(5);
-                    break;
-                case BookEntry.GENRE_TRAVEL:
-                    bookGenre.setSelection(6);
-                    break;
-                default:
-                    bookGenre.setSelection(0);
-                    break;
-            }
-
+        if (TextUtils.isEmpty(saveBookName) || saveBookName.length() > 50) {
+            bookName.setError(getString(string.please_check_data));
+            return false;
         }
 
+        if (TextUtils.isEmpty(saveBookPrice) || saveBookPrice.length() > 3) {
+            bookPrice.setError(getString(string.please_check_data));
+            return false;
+        }
+
+        if (TextUtils.isEmpty(saveBookQuantity) || saveBookQuantity.length() > 3) {
+            bookQuantity.setError(getString(string.please_check_data));
+            return false;
+        }
+
+        if (TextUtils.isEmpty(saveBookSupplier) || saveBookSupplier.length() > 50) {
+            bookSupplier.setError(getString(string.please_check_data));
+            return false;
+        }
+
+        if (TextUtils.isEmpty(saveBookPhone) || saveBookPhone.length() > 30) {
+            bookSupplierPhone.setError(getString(string.please_check_data));
+            return false;
+        }
+
+        if (TextUtils.isEmpty(saveBookEmail) || saveBookEmail.length() > 50 || !isValidEmail(saveBookEmail)) {
+            bookSupplierEmail.setError(getString(string.invalid_email));
+            return false;
+        }
+
+        try {
+            Double bookPriceDouble = Double.parseDouble(saveBookPrice);
+        } catch (NumberFormatException e) {
+            bookPrice.setError(getString(string.price_error));
+            return false;
+        }
+
+        try {
+            int bookQuantityInt = Integer.parseInt(saveBookQuantity);
+        } catch (NumberFormatException e) {
+            bookQuantity.setError(getString(string.quantity_error));
+            return false;
+        }
+
+        return true;
     }
 
     /**
@@ -593,5 +533,66 @@ public class BookStoreEditor extends AppCompatActivity implements LoaderManager.
             Toast.makeText(BookStoreEditor.this, string.cell_phone_number, Toast.LENGTH_SHORT).show();
         }
     }
+
+    /**
+     * This will extract the value from the Cursor and update the views with the values from the database
+     */
+    @Override
+    public void onLoadFinished(Loader<Cursor> loader, Cursor cursor) {
+        if (cursor == null || cursor.getCount() < 1) {
+            return;
+        }
+
+        if (cursor.moveToFirst()) {
+            int bookNameColumnIndex = cursor.getColumnIndex(BookEntry.COLUMN_NAME);
+            int bookGenreColumnIndex = cursor.getColumnIndex(BookEntry.COLUMN_GENRE);
+            int bookPriceColumnIndex = cursor.getColumnIndex(BookEntry.COLUMN_PRICE);
+            int bookQuantityColumnIndex = cursor.getColumnIndex(BookEntry.COLUMN_QUANTITY);
+            int bookSupplierColumnIndex = cursor.getColumnIndex(BookEntry.COLUMN_SUPPLIER);
+            int bookPhoneColumnIndex = cursor.getColumnIndex(BookEntry.COLUMN_SUPPLIER_PHONE);
+            int bookEmailColumnIndex = cursor.getColumnIndex(BookEntry.COLUMN_SUPPLIER_EMAIL);
+
+            final String name = cursor.getString(bookNameColumnIndex);
+            int genre = cursor.getInt(bookGenreColumnIndex);
+            double price = cursor.getInt(bookPriceColumnIndex);
+            int quantity = cursor.getInt(bookQuantityColumnIndex);
+            final String supplier = cursor.getString(bookSupplierColumnIndex);
+            final String phone = cursor.getString(bookPhoneColumnIndex);
+            final String email = cursor.getString(bookEmailColumnIndex);
+
+            bookName.setText(name);
+            bookPrice.setText(Double.toString(price));
+            bookQuantity.setText(Integer.toString(quantity));
+            bookSupplier.setText(supplier);
+            bookSupplierPhone.setText(phone);
+            bookSupplierEmail.setText(email);
+            switch (genre) {
+                case BookEntry.GENRE_SCIENCE_FICTION:
+                    bookGenre.setSelection(1);
+                    break;
+                case BookEntry.GENRE_DRAMA:
+                    bookGenre.setSelection(2);
+                    break;
+                case BookEntry.GENRE_ROMANCE:
+                    bookGenre.setSelection(3);
+                    break;
+                case BookEntry.GENRE_HORROR:
+                    bookGenre.setSelection(4);
+                    break;
+                case BookEntry.GENRE_SELF_HELP:
+                    bookGenre.setSelection(5);
+                    break;
+                case BookEntry.GENRE_TRAVEL:
+                    bookGenre.setSelection(6);
+                    break;
+                default:
+                    bookGenre.setSelection(0);
+                    break;
+            }
+
+        }
+
+    }
+
 }
 

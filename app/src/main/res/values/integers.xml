@@ -8,5 +8,6 @@
     <integer name="linear_layout_value_4">4</integer>
     <integer name="maxLength50">50</integer>
     <integer name="maxLength30">30</integer>
+    <integer name="maxLength15">15</integer>
     <integer name="maxLength3">3</integer>
 </resources>
